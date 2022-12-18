@@ -33,3 +33,10 @@ Image GenerateHumanImage()
 
 	return img;
 }
+
+Texture2D GenerateHuman() {
+	Image img = GenerateHumanImage();
+	Texture2D tex = LoadTextureFromImage(img);
+	UnloadImage(img);
+	return tex;
+}

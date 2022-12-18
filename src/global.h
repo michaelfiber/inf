@@ -63,7 +63,7 @@ int GetBiomeAtWorldLocation(Location worldLoc);
 int GetElevationAtWorldLoc(Location worldLoc);
 
 // human.c
-Image GenerateHumanImage();
+Texture2D GenerateHuman();
 
 // game.c
 void InitGame();

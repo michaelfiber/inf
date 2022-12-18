@@ -3,7 +3,7 @@
 CC = gcc
 MAKE ?= make
 RAYLIB_PATH=../../raylib
-PROJECT_NAME ?= game
+BINARY ?= ../bin/game
 PLATFORM ?= PLATFORM_DESKTOP
 
 CFLAGS = -std=c99 -Wall -Wno-missing-braces -Wunused-result -D_DEFAULT_SOURCE -s -O2
@@ -14,26 +14,18 @@ LDLIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 LDFLAGS = -L. -L$(RAYLIB_PATH)/src
 
-PROJECT_SOURCE_FILES ?= \
-	random.c \
-	drawimage.c \
-	generator.c \
-	biomes.c \
-	local.c \
-	world.c \
-	game.c \
-	human.c \
-	main.c
+PROJECT_SOURCE_FILES ?= $(wildcard *.c)
 
 OBJS = $(patsubst %.c, %.o, $(PROJECT_SOURCE_FILES))
 
-MAKEFILE_PARAMS = $(PROJECT_NAME)
+MAKEFILE_PARAMS = $(BINARY)
 
 all:
+	mkdir -p ../bin
 	$(MAKE) $(MAKEFILE_PARAMS)
 
-$(PROJECT_NAME): $(OBJS)
-	$(CC) -o $(PROJECT_NAME)$(EXT) $(OBJS) $(CFLAGS) $(INCLUDE_PATHS) $(LDFLAGS) $(LDLIBS) -D$(PLATFORM)
+$(BINARY): $(OBJS)
+	$(CC) -o $(BINARY)$(EXT) $(OBJS) $(CFLAGS) $(INCLUDE_PATHS) $(LDFLAGS) $(LDLIBS) -D$(PLATFORM)
 	rm -fv *.o
 
 %.o: %.c
@@ -42,4 +34,5 @@ $(PROJECT_NAME): $(OBJS)
 clean:
 	find . -type f -executable -delete
 	rm -fv *.o
+	rm -rf ../bin
 	@echo Cleaning done

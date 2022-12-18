@@ -69,10 +69,6 @@ void InitGame()
 
 	player.speed = 100.0f;
 
-	Image playerImage = GenerateHumanImage();
-	player.tex = LoadTextureFromImage(playerImage);
-	UnloadImage(playerImage);
-
 	ResetCamera();
 
 	// initialize the randomizer with the world seed.
@@ -90,6 +86,8 @@ void InitGame()
 
 	cells = (GridCell *)MemAlloc(sizeof(GridCell) * WORLD_WIDTH * WORLD_HEIGHT);
 	FillLayers(player.grid, cells, heights);
+
+	player.tex = GenerateHuman();
 }
 
 void UpdateLocal()
