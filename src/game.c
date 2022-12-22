@@ -6,6 +6,7 @@ Camera2D camera = {0};
 Texture2D worldTexture = {0};
 Texture2D heightMapTexture = {0};
 Texture2D groundTileTexture = {0};
+Texture2D houseTileTexture = {0};
 Texture2D biomeFeatureTexture = {0};
 
 Player player = {0};
@@ -88,6 +89,8 @@ void InitGame()
 	FillLayers(player.grid, cells, heights);
 
 	player.tex = GenerateHuman();
+
+	houseTileTexture = GenerateHouseTexture();
 }
 
 void UpdateLocal()
@@ -208,7 +211,7 @@ void DrawGame()
 		}
 	}
 	EndMode2D();
-
+	DrawTexture(houseTileTexture, 0, 0, WHITE);
 	DrawText(TextFormat("Draw:%i Biome:%i Grid:%ix%i", drawCount, GetBiomeAtWorldLocation(player.grid), player.grid.x, player.grid.y), 10, 10, GetFontDefault().baseSize, BLACK);
 }
 
@@ -221,6 +224,7 @@ void UnloadGame()
 	UnloadTexture(groundTileTexture);
 	UnloadTexture(biomeFeatureTexture);
 	UnloadTexture(player.tex);
+	UnloadTexture(houseTileTexture);
 
 	MemFree(cells);
 	MemFree(heights);

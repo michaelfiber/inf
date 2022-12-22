@@ -54,6 +54,9 @@ Image GenerateWorldHeightMap(int width, int height, int worldSeed);
 void GenerateWorldImage(Image heightMap, unsigned char *heights, Image *worldImage);
 void FillLayers(Location worldLoc, GridCell *cells, unsigned char *heights);
 
+// houses.c
+Texture2D GenerateHouseTexture();
+
 // biomes.c
 Color GetBiomeColor(int biome);
 int GetBiome(int elevation);
